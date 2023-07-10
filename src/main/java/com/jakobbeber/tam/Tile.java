@@ -1,12 +1,14 @@
+package com.jakobbeber.tam;
+
 public class Tile {
     private int[] colors;
     private int[] glue;
-    private Tile[] neighbors;
+    private String name;
 
     public Tile() {
         colors = new int[4]; // initialize colors array with default values
         glue = new int[4]; // initialize glue array with default values
-        neighbors = new Tile[4]; // initialize neighbors array with null values
+        name = "Test";
     }
 
     public int[] getColors() {
@@ -25,11 +27,12 @@ public class Tile {
         this.glue = glue;
     }
 
-    public Tile[] getNeighbors() {
-        return neighbors;
+    public String getName() {
+        return name;
     }
 
-    public void setNeighbors(Tile[] neighbors) {
-        this.neighbors = neighbors;
+    public void setName(String name) {
+        this.name = name;
     }
+
 }
