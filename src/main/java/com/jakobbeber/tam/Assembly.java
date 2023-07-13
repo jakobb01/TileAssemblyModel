@@ -17,7 +17,7 @@ public class Assembly {
     // starting tiles to choose from
     public void firstsetQueue() {
         // we put 0, 1 and 1, 0 into queue
-        queue.add(new Duo(0, 1));
+        queue.add(new Duo(0, -1));
         queue.add(new Duo(1, 0));
     }
 
@@ -46,7 +46,5 @@ public class Assembly {
     }
 
 
-
-
-
 }
+
