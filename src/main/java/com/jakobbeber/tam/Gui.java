@@ -6,22 +6,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import javax.imageio.IIOException;
-import java.io.IOException;
-import java.util.Objects;
+
 
 public class Gui extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) throws Exception {
         // Load the FXML file
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Test_fx.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Picture.fxml"));
 
 
         // Create a scene with the loaded FXML file
         Scene scene = new Scene(root);
 
-        primaryStage.setTitle("Test");
+        primaryStage.setTitle("Main Menu");
         // Set the scene on the primary stage
         primaryStage.setScene(scene);
         primaryStage.show();
