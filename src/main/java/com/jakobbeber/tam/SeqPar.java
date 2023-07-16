@@ -1,8 +1,11 @@
 package com.jakobbeber.tam;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
+
+import static java.lang.Math.min;
 
 public class SeqPar {
 
@@ -45,18 +48,33 @@ public class SeqPar {
         return (stopTime - startTime);
     }
 
-    public long parallel(List<Map.Entry<Integer,Integer>>  queue, Tile[] tilesArray, List<Map.Entry<Integer,Integer>> nextIter) {
+    public long parallel(List<Map.Entry<Integer,Integer>>  queue, Tile[] tilesArray, List<Map.Entry<Integer,Integer>> nextIter) throws InterruptedException {
 
         long startTime = System.nanoTime();
 
-        Thread t1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                sequential(queue, tilesArray);
-            }
-        });
+        int availableProcessors = Runtime.getRuntime().availableProcessors();
 
-        t1.start();
+        System.out.println(queue.size());
+        int m = min(availableProcessors, (queue.size()));
+        System.out.println(m);
+
+        while (!queue.isEmpty()) {
+            for (int i = 1; i < m+1; i++) {
+                Multi multi = new Multi(i, assembly, assembler, queue.get(0));
+                queue.remove(0);
+                multi.start();
+                multi.join();
+            }
+            if (queue.isEmpty()) {
+                queue.addAll(nextIter);
+                nextIter.clear();
+            }
+
+        }
+
+
+
+        System.out.println(Arrays.asList(assembly.getTable()));
 
         long stopTime = System.nanoTime();
 

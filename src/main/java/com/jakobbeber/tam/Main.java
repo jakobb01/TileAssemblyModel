@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         Tiles tiles = new Tiles();
         Assembly assembly = new Assembly();
@@ -18,6 +18,7 @@ public class Main {
 
         // create tiles to build from
         Tile[] tilesArray = tiles.createBinary();
+        assembly.setTiles(tilesArray);
 
 
         // starting table & tile (seed)
@@ -43,8 +44,8 @@ public class Main {
 
 
         // ASSEMBLY - SEQUENTIAL
-        elapsedTime = seqPar.sequential(queue, tilesArray);
-        System.out.println("Elapsed time for sequential: " + elapsedTime/1000000 + " ms");
+        //elapsedTime = seqPar.sequential(queue, tilesArray);
+        //System.out.println("Elapsed time for sequential: " + elapsedTime/1000000 + " ms");
 
 
         // ASSEMBLY - PARALLEL
