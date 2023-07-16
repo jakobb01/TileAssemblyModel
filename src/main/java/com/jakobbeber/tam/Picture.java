@@ -11,8 +11,18 @@ public class Picture {
     @FXML
     private MenuBar menu;
 
+
+
     @FXML
     private GridPane mtx;
+
+    public void matrika() {
+        mtx = new GridPane();
+        mtx.add(new Button("0"), 0, 0);
+
+    }
+
+
 
     @FXML
     private Button start;

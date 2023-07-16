@@ -3,14 +3,16 @@ package com.jakobbeber.tam;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Main {
 
     public static void main(String[] args) {
 
-        //TO DO: User can create his own tiles, this is just a demo
+        //TO DO: two set of tiles for computation
         //
         //create tiles
         // INT TO CHARS COLORS:
@@ -22,25 +24,25 @@ public class Main {
         // 3 = R
         Tile s = new Tile();
                             //N, S, W, E
-        s.setColors(new int[]{3, -1, 2, -1});
+        s.setColors(new int[]{-1, 3, -1, 2});
         s.setGlue(new int[]{1, 1, 1, 1});
         s.setName("Seed");
 
         Tile r = new Tile();
                             //N, S, W, E
-        r.setColors(new int[]{3, 3, 1, -1});
+        r.setColors(new int[]{3, 3, -1, 1});
         r.setGlue(new int[]{1, 1, 1, 1});
         r.setName("R");
 
         Tile b = new Tile();
                             //N, S, W, E
-        b.setColors(new int[]{0, -1, 2, 2});
+        b.setColors(new int[]{-1, 0, 2, 2});
         b.setGlue(new int[]{1, 1, 1, 1});
         b.setName("B");
 
         Tile nic0 = new Tile();
                                //N, S, W, E
-        nic0.setColors(new int[]{0, 1, 1, 1});
+        nic0.setColors(new int[]{1, 0, 1, 1});
         nic0.setGlue(new int[]{1, 1, 1, 1});
         nic0.setName("0");
 
@@ -58,7 +60,7 @@ public class Main {
 
         Tile ena2 = new Tile();
                                //N, S, W, E
-        ena2.setColors(new int[]{1, 0, 0, 1});
+        ena2.setColors(new int[]{0, 1, 1, 0});
         ena2.setGlue(new int[]{1, 1, 1, 1});
         ena2.setName("1_");
 
@@ -85,30 +87,53 @@ public class Main {
         table.put(0, 0, s);
         assembly.setTable(table);
 
-        // we put 0, 1 and 1, 0 into queue
-        assembly.setQueue(new HashSet<>());
-        assembly.firstsetQueue();
 
-        // define two queues - we always pick from 1 and put into 2, when 1 is empty, we switch
-        Set<Duo> queue = assembly.getQueue();
-        Set<Duo> queue2 = new HashSet<>();
-        Assembler assembler = new Assembler(table);
+
+
+        // define two queues - we always pick from queue (local) and put into nextIter
+        List<java.util.Map.Entry<Integer,Integer>> nextIter = assembly.getQueue();
+        // we put 0, 1 and 1, 0 into queue
+        assembly.firstQueue();
+        nextIter = assembly.getQueue();
+        java.util.List<java.util.Map.Entry<Integer,Integer>> queue= new java.util.ArrayList<>();
+
 
 
         // ASSEMBLY - INFINITE LOOP
+        Assembler assembler = new Assembler(assembly);
+        queue.addAll(nextIter);
+        nextIter.clear();
         // TO DO: Stop loop if certain size of table is reached
-        while (!queue.isEmpty()) {
+        int i = 0;
+        long start_Time = System.nanoTime();
+        while (!queue.isEmpty() && !(i==100000)) {
+
+            //System.out.println("Queue size: " + queue.size() + " NextIter size: " + nextIter.size());
+
             // we pick from the queue one tile at the time
-            Duo picked = queue.iterator().next();
-            queue2.addAll( assembler.assemble(picked, tiles, table) );
-            table = assembler.getTable();
+            int randomNum = ThreadLocalRandom.current().nextInt(0, queue.size());
+            Map.Entry<Integer,Integer> picked = queue.get(randomNum);
+            assembler.assemble(picked, tiles);
             queue.remove(picked);
+            nextIter = assembly.getQueue();
+
+            //System.out.println("NextIter: " + assembly.getQueue().toString());
+
             if (queue.isEmpty()) {
-                assembly.setQueue(queue2);
-                queue2 = new HashSet<>();
+                queue.addAll(nextIter);
+                nextIter.clear();
             }
-            System.out.println(Arrays.asList(table));
+            i++;
+            //System.out.println(Arrays.asList(assembly.getTable()));
         }
+        long stopTime = System.nanoTime();
+
+
+        System.out.println(Arrays.asList(assembly.getTable()));
+
+        long elapsedTime = (stopTime - start_Time);
+        System.out.println("Elapsed time: " + elapsedTime/1000000 + " ms");
+
 
 
 
