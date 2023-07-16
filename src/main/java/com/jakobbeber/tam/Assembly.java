@@ -11,6 +11,8 @@ public class Assembly {
     private Table<Integer, Integer, Tile> table;
     private Tile[] tiles;
 
+    private Queue<int []> conveyor;
+
 
 
     // starting tiles to choose from
@@ -57,6 +59,12 @@ public class Assembly {
         this.tiles = tiles;
     }
 
+    public Queue<int[]> getConveyor() {
+        return conveyor;
+    }
 
+    public void setConveyor(Queue<int[]> conveyor) {
+        this.conveyor = conveyor;
+    }
 }
 

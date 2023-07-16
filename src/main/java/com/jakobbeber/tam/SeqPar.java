@@ -1,8 +1,6 @@
 package com.jakobbeber.tam;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static java.lang.Math.min;
@@ -50,27 +48,35 @@ public class SeqPar {
 
     public long parallel(List<Map.Entry<Integer,Integer>>  queue, Tile[] tilesArray, List<Map.Entry<Integer,Integer>> nextIter) throws InterruptedException {
 
+        SimplerAssembler simplerAssembler = new SimplerAssembler(assembly);
+
         long startTime = System.nanoTime();
 
         int availableProcessors = Runtime.getRuntime().availableProcessors();
 
-        System.out.println(queue.size());
-        int m = min(availableProcessors, (queue.size()));
-        System.out.println(m);
-
-        while (!queue.isEmpty()) {
-            for (int i = 1; i < m+1; i++) {
-                Multi multi = new Multi(i, assembly, assembler, queue.get(0));
-                queue.remove(0);
-                multi.start();
-                multi.join();
+        // Init conveyor (queue)
+        Queue<int []> conveyor = new LinkedList<>();
+        conveyor.add(new int[]{0,1});
+        conveyor.add(new int[]{1,0});
+        assembly.setConveyor(conveyor);
+        // run function till when queue is empty or x and y is enough
+        int k = 0;
+        while (!queue.isEmpty() && !(k==10000)) {
+            for (int i = 1; i < availableProcessors+1; i++) {
+                Thread thread = new Thread() {
+                    public void run() {
+                        try {
+                            simplerAssembler.simpleAssemble();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                };
+                thread.start();
             }
-            if (queue.isEmpty()) {
-                queue.addAll(nextIter);
-                nextIter.clear();
-            }
-
+            k++;
         }
+
 
 
 
@@ -79,7 +85,7 @@ public class SeqPar {
         long stopTime = System.nanoTime();
 
 
-        return startTime - stopTime;
+        return stopTime - startTime;
     }
 
 
