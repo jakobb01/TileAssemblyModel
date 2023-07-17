@@ -41,15 +41,16 @@ public class Main {
 
         //timer
         long elapsedTime = -1;
+        long sizeoftable = 100000;
 
 
         // ASSEMBLY - SEQUENTIAL
-        //elapsedTime = seqPar.sequential(queue, tilesArray);
-        //System.out.println("Elapsed time for sequential: " + elapsedTime/1000000 + " ms");
+        elapsedTime = seqPar.sequential(sizeoftable, queue, tilesArray);
+        System.out.println("Elapsed time for sequential: " + elapsedTime/1000000 + " ms");
 
 
         // ASSEMBLY - PARALLEL
-        elapsedTime = seqPar.parallel();
+        //elapsedTime = seqPar.parallel(sizeoftable);
         System.out.println("Elapsed time for parallel: " + elapsedTime/1000000 + " ms");
 
 

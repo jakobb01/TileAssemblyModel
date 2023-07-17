@@ -15,13 +15,13 @@ public class SeqPar {
         this.assembler = assembler;
     }
 
-    public long sequential(List<Map.Entry<Integer,Integer>>  queue, Tile[] tilesArray) {
+    public long sequential(long k, List<Map.Entry<Integer,Integer>>  queue, Tile[] tilesArray) {
         List<Map.Entry<Integer, Integer>> nextIter;
 
         // TO DO: Stop loop if certain size of table is reached
         int i = 0;
         long startTime = System.nanoTime();
-        while (!queue.isEmpty() && !(i==100000)) {
+        while (!queue.isEmpty() && (queue.get(0).getKey() < k) && (queue.get(0).getValue() < k)) {
 
             // we pick from the queue one tile at the time
             int randomNum = ThreadLocalRandom.current().nextInt(0, queue.size());
@@ -42,11 +42,11 @@ public class SeqPar {
             i++;
         }
         long stopTime = System.nanoTime();
-        //System.out.println(Arrays.asList(assembly.getTable()));
+        System.out.println(Arrays.asList(assembly.getTable()));
         return (stopTime - startTime);
     }
 
-    public long parallel() throws InterruptedException {
+    public long parallel(long k) throws InterruptedException {
 
         SimplerAssembler simplerAssembler = new SimplerAssembler(assembly);
         List<Map.Entry<Integer, Integer>> nextIter;
@@ -63,11 +63,14 @@ public class SeqPar {
         assembly.setQueue2(queue);
         nextIter.clear();
 
-        // run function till when queue is empty or x and y is enough
-        int k = 0;
-        while ((!queue.isEmpty()) && !(k==10000)) {
+        // run function till when queue is empty or k is enough
+        while ((!queue.isEmpty()) && (queue.get(0).getKey() < k) && (queue.get(0).getValue() < k)) {
+
+            int m = min(availableProcessors, queue.size()+1);
+
             Thread thread[] = new Thread[availableProcessors+1];
-            for (int i = 1; i < availableProcessors+1; i++) {
+
+            for (int i = 1; i < m; i++) {
                 thread[i] = new Thread() {
                     public void run() {
                         try {
@@ -79,7 +82,7 @@ public class SeqPar {
                 };
                 thread[i].start();
             }
-            for (int i = 1; i < availableProcessors+1; i++) {
+            for (int i = 1; i < m; i++) {
                 thread[i].join(10);
             }
             queue = assembly.getQueue2();
@@ -89,7 +92,7 @@ public class SeqPar {
                 queue.addAll(nextIter);
                 nextIter.clear();
             }
-            k++;
+
             //System.out.println(queue.isEmpty());
         }
 
