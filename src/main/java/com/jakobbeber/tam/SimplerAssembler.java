@@ -4,6 +4,8 @@ import com.google.common.collect.Table;
 import com.google.common.util.concurrent.Monitor;
 
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.locks.Lock;
@@ -29,16 +31,18 @@ public class SimplerAssembler {
         int[] neighborsGlue = new int[4];
         int x = 0, y = 0;
 
-        Queue<int[]> conveyor = assembly.getConveyor();
+        List<Map.Entry<Integer,Integer>> queue = assembly.getQueue2();
 
         lock.lock();
         try {
-            while (conveyor.isEmpty()) {
+            while (queue.isEmpty()) {
                 Thread.sleep(10);
             }
-            int[] xy = conveyor.remove();
-            x = xy[0];
-            y = xy[1];
+            Map.Entry<Integer,Integer> picked = queue.get(0);
+            queue.remove(picked);
+            x = picked.getKey();
+            y = picked.getValue();
+            assembly.setQueue2(queue);
             //System.out.println("Thread " + Thread.currentThread().getName() + " is assembling tile " + x + ", " + y);
         } finally {
             lock.unlock();
@@ -59,21 +63,14 @@ public class SimplerAssembler {
         neighborsGlue[3] = neighbors[7];
 
         if (assembler.compare(x, y, foundationTiles, neighborsColors, neighborsGlue)) {
-            /*
-            lock2.lock();
-            try {
-
-             */
-                conveyor.add(new int[]{x+1, y});
-                conveyor.add(new int[]{x, y+1});
-                //System.out.println("here");
-            /*
-            } finally {
-                lock2.unlock();
+            if (!(assembly.containsQueue(x+1, (y)))) {
+                assembly.addQueue(x+1, y);
             }
-
-             */
+            if (!(assembly.containsQueue((x), (y+1)))) {
+                assembly.addQueue(x, y+1);
+            }
             return true;
+
         }
         else {
             return false;

@@ -46,24 +46,29 @@ public class SeqPar {
         return (stopTime - startTime);
     }
 
-    public long parallel(List<Map.Entry<Integer,Integer>>  queue, Tile[] tilesArray, List<Map.Entry<Integer,Integer>> nextIter) throws InterruptedException {
+    public long parallel() throws InterruptedException {
 
         SimplerAssembler simplerAssembler = new SimplerAssembler(assembly);
+        List<Map.Entry<Integer, Integer>> nextIter;
+        List<Map.Entry<Integer, Integer>> queue = new ArrayList<>();
 
         long startTime = System.nanoTime();
 
         int availableProcessors = Runtime.getRuntime().availableProcessors();
 
-        // Init conveyor (queue)
-        Queue<int []> conveyor = new LinkedList<>();
-        conveyor.add(new int[]{0,1});
-        conveyor.add(new int[]{1,0});
-        assembly.setConveyor(conveyor);
+        // we put 0, 1 and 1, 0 into queue
+        assembly.firstQueue();
+        nextIter = assembly.getQueue();
+        queue.addAll(nextIter);
+        assembly.setQueue2(queue);
+        nextIter.clear();
+
         // run function till when queue is empty or x and y is enough
         int k = 0;
-        while (!queue.isEmpty() && !(k==10000)) {
+        while ((!queue.isEmpty()) && !(k==10000)) {
+            Thread thread[] = new Thread[availableProcessors+1];
             for (int i = 1; i < availableProcessors+1; i++) {
-                Thread thread = new Thread() {
+                thread[i] = new Thread() {
                     public void run() {
                         try {
                             simplerAssembler.simpleAssemble();
@@ -72,9 +77,20 @@ public class SeqPar {
                         }
                     }
                 };
-                thread.start();
+                thread[i].start();
+            }
+            for (int i = 1; i < availableProcessors+1; i++) {
+                thread[i].join(10);
+            }
+            queue = assembly.getQueue2();
+            nextIter = assembly.getQueue();
+            if (queue.isEmpty()) {
+
+                queue.addAll(nextIter);
+                nextIter.clear();
             }
             k++;
+            //System.out.println(queue.isEmpty());
         }
 
 

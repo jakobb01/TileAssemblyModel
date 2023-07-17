@@ -49,7 +49,7 @@ public class Main {
 
 
         // ASSEMBLY - PARALLEL
-        elapsedTime = seqPar.parallel(queue, tilesArray, nextIter);
+        elapsedTime = seqPar.parallel();
         System.out.println("Elapsed time for parallel: " + elapsedTime/1000000 + " ms");
 
 

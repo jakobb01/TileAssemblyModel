@@ -8,6 +8,7 @@ public class Assembly {
 
 
     private List<Map.Entry<Integer,Integer>> queue;
+    private List<Map.Entry<Integer,Integer>> queue2;
     private Table<Integer, Integer, Tile> table;
     private Tile[] tiles;
 
@@ -41,6 +42,14 @@ public class Assembly {
 
     public void removeQueue(Map.Entry<Integer, Integer> remove) {
         this.queue.remove(remove);
+    }
+
+    public List<Map.Entry<Integer, Integer>> getQueue2() {
+        return queue2;
+    }
+
+    public void setQueue2(List<Map.Entry<Integer, Integer>> queue2) {
+        this.queue2 = queue2;
     }
 
     public Table<Integer, Integer, Tile> getTable() {
