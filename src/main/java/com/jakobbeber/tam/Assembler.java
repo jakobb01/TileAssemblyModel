@@ -30,7 +30,7 @@ public class Assembler {
             Tile north = table.get(x, y-1);
             while (north == null) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(10);
                     north = table.get(x, y-1);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
@@ -55,7 +55,7 @@ public class Assembler {
             Tile west = table.get(x-1, y);
             while (west == null) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(10);
                     west = table.get(x, y-1);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

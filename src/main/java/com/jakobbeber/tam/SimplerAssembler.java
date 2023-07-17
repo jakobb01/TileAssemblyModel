@@ -36,7 +36,7 @@ public class SimplerAssembler {
         lock.lock();
         try {
             while (queue.isEmpty()) {
-                Thread.sleep(10);
+                Thread.sleep(5);
             }
             Map.Entry<Integer,Integer> picked = queue.get(0);
             queue.remove(picked);
