@@ -10,6 +10,9 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
+        Gui gui = new Gui();
+        gui.main(args);
+
         Tiles tiles = new Tiles();
         Assembly assembly = new Assembly();
         Assembler assembler = new Assembler(assembly);
@@ -45,12 +48,12 @@ public class Main {
 
 
         // ASSEMBLY - SEQUENTIAL
-        //elapsedTime = seqPar.sequential(sizeoftable, queue, tilesArray);
+        elapsedTime = seqPar.sequential(sizeoftable, queue, tilesArray);
         System.out.println("Elapsed time for sequential: " + elapsedTime/1000000 + " ms");
 
 
         // ASSEMBLY - PARALLEL
-        elapsedTime = seqPar.parallel(sizeoftable);
+        //elapsedTime = seqPar.parallel(sizeoftable);
         System.out.println("Elapsed time for parallel: " + elapsedTime/1000000 + " ms");
 
 

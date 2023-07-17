@@ -8,20 +8,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jakobbeber.tam.Menu">
    <children>
       <SplitPane dividerPositions="0.5050403225806452" orientation="VERTICAL" prefHeight="300.0" prefWidth="250.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <RadioButton fx:id="binary" layoutX="15.0" layoutY="28.0" mnemonicParsing="false" text="Binary counter" />
-                  <RadioButton fx:id="triangle" layoutX="15.0" layoutY="56.0" mnemonicParsing="false" text="Sierpinski triangle" />
-                  <TextField layoutX="15.0" layoutY="108.0" prefHeight="26.0" prefWidth="50.0" promptText="800" text="800" fx:id="xsize" />
-                  <TextField fx:id="ysize" layoutX="88.0" layoutY="108.0" prefHeight="26.0" prefWidth="50.0" promptText="600" text="600" />
+                  <RadioButton fx:id="binary" layoutX="15.0" layoutY="28.0" mnemonicParsing="false" onAction="#binary" text="Binary counter" />
+                  <RadioButton fx:id="triangle" layoutX="15.0" layoutY="56.0" mnemonicParsing="false" onAction="#trinagle" text="Sierpinski triangle" />
+                  <TextField layoutX="15.0" layoutY="108.0" onAction="#x_size" prefHeight="26.0" prefWidth="50.0" promptText="100" text="100" fx:id="xsize" />
+                  <TextField fx:id="ysize" layoutX="88.0" layoutY="108.0" onAction="#y_size" prefHeight="26.0" prefWidth="50.0" promptText="100" text="100" />
                   <Text layoutX="73.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
                   <Text layoutX="15.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set up:" />
-                  <Text layoutX="15.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Size:" />
+                  <Text layoutX="15.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How many tiles to compute:" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="386.0">
@@ -31,14 +30,14 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
                               <Text layoutX="37.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How should the program be run:" />
-                              <Button fx:id="seq" layoutX="14.0" layoutY="34.0" mnemonicParsing="false" text="Sequential" />
-                              <Button fx:id="par" layoutX="96.0" layoutY="34.0" mnemonicParsing="false" text="Parralel" />
-                              <Button fx:id="dist" layoutX="158.0" layoutY="34.0" mnemonicParsing="false" text="Distributed" />
+                              <Button fx:id="seq" layoutX="14.0" layoutY="34.0" mnemonicParsing="false" onAction="#mode" prefHeight="26.0" prefWidth="72.0" text="Sequential" />
+                              <Button fx:id="par" layoutX="96.0" layoutY="34.0" mnemonicParsing="false" onAction="#mode" prefHeight="26.0" prefWidth="56.0" text="Parallel" />
+                              <Button fx:id="dist" layoutX="158.0" layoutY="35.0" mnemonicParsing="false" onAction="#mode" prefHeight="26.0" prefWidth="75.0" text="Distributed" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <Button fx:id="start" layoutX="69.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" text="START" />
+                              <Button fx:id="start" disable="true" layoutX="69.0" layoutY="14.0" mnemonicParsing="false" onAction="#runSim" prefHeight="40.0" prefWidth="110.0" text="START" />
                            </children>
                         </AnchorPane>
                     </items>
