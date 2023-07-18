@@ -18,7 +18,7 @@ public class Main {
         Assembly assembly = new Assembly();
         Assembler assembler = new Assembler(assembly);
         SeqPar seqPar = new SeqPar(assembly, assembler);
-        Picture picture = new Picture(assembly);
+        //Picture picture = new Picture(assembly);
 
 
         // create tiles to build from

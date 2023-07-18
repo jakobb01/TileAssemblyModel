@@ -11,15 +11,17 @@ public class PictureLoader extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Load the FXML file
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Menu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Picture.fxml"));
 
         // Create a scene with the loaded FXML file
         Scene scene = new Scene(root);
 
-        primaryStage.setTitle("Main Menu");
+        primaryStage.setTitle("Picture");
         // Set the scene on the primary stage
         primaryStage.setScene(scene);
         primaryStage.show();
+
+
     }
 
     public static void main(String[] args) {

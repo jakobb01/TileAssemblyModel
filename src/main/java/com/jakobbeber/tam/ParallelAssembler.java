@@ -1,21 +1,17 @@
 package com.jakobbeber.tam;
 
-import com.google.common.collect.Table;
 import com.google.common.util.concurrent.Monitor;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class SimplerAssembler {
+public class ParallelAssembler {
 
     private Assembly assembly;
 
-    public SimplerAssembler(Assembly assembly) {
+    public ParallelAssembler(Assembly assembly) {
         this.assembly = assembly;
     }
     private Monitor mutex = new Monitor();

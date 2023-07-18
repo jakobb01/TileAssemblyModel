@@ -109,9 +109,7 @@ public class Assembler {
             }
 
         }
-
         assembly.setTable(table);
-
         return match;
     }
 
@@ -158,14 +156,5 @@ public class Assembler {
         else {
             return false;
         }
-
-
-
-
-
-
-
-
     }
-
 }

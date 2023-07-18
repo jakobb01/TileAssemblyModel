@@ -48,7 +48,7 @@ public class SeqPar {
 
     public long parallel(long k) throws InterruptedException {
 
-        SimplerAssembler simplerAssembler = new SimplerAssembler(assembly);
+        ParallelAssembler parallelAssembler = new ParallelAssembler(assembly);
         List<Map.Entry<Integer, Integer>> nextIter;
         List<Map.Entry<Integer, Integer>> queue = new ArrayList<>();
 
@@ -74,7 +74,7 @@ public class SeqPar {
                 thread[i] = new Thread() {
                     public void run() {
                         try {
-                            simplerAssembler.simpleAssemble();
+                            parallelAssembler.simpleAssemble();
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }

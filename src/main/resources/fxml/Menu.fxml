@@ -32,7 +32,7 @@
                               <Text layoutX="37.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How should the program be run:" />
                               <Button fx:id="seq" layoutX="14.0" layoutY="34.0" mnemonicParsing="false" onAction="#mode" prefHeight="26.0" prefWidth="72.0" text="Sequential" />
                               <Button fx:id="par" layoutX="96.0" layoutY="34.0" mnemonicParsing="false" onAction="#mode" prefHeight="26.0" prefWidth="56.0" text="Parallel" />
-                              <Button fx:id="dist" layoutX="158.0" layoutY="35.0" mnemonicParsing="false" onAction="#mode" prefHeight="26.0" prefWidth="75.0" text="Distributed" />
+                              <Button fx:id="dist" disable="true" layoutX="158.0" layoutY="35.0" mnemonicParsing="false" onAction="#mode" prefHeight="26.0" prefWidth="75.0" text="Distributed" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

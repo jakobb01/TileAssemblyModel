@@ -14,11 +14,14 @@ import java.util.Objects;
 
 public class Picture {
 
+
     private Assembly assembly;
 
     public Picture(Assembly assembly) {
         this.assembly = assembly;
     }
+
+
 
     @FXML
     private GridPane mtx;
@@ -82,7 +85,6 @@ public class Picture {
 
         Table<Integer, Integer, Tile> table = assembly.getTable();
         String string = Objects.requireNonNull(table.get(x, y)).getName();
-
         TextField tf = new TextField(string);
         tf.setPrefHeight(30);
         tf.setPrefWidth(30);
