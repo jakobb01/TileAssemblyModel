@@ -8,15 +8,17 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException  {
 
-        Gui gui = new Gui();
-        gui.main(args);
+        MenuLoader menuLoader = new MenuLoader();
+        PictureLoader pictureLoader = new PictureLoader();
+        menuLoader.main(args);
 
         Tiles tiles = new Tiles();
         Assembly assembly = new Assembly();
         Assembler assembler = new Assembler(assembly);
         SeqPar seqPar = new SeqPar(assembly, assembler);
+        Picture picture = new Picture(assembly);
 
 
         // create tiles to build from
@@ -56,12 +58,6 @@ public class Main {
         //elapsedTime = seqPar.parallel(sizeoftable);
         System.out.println("Elapsed time for parallel: " + elapsedTime/1000000 + " ms");
 
-
-
-
-
-
+        pictureLoader.main(args);
     }
-
-
 }
