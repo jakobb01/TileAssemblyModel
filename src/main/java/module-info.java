@@ -3,7 +3,7 @@ module com.jakobbeber.tam {
     requires javafx.fxml;
     requires java.desktop;
     requires com.google.common;
-    requires mpi;
+    //requires mpi;
 
     opens com.jakobbeber.tam to javafx.fxml;
     exports com.jakobbeber.tam;

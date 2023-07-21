@@ -20,7 +20,7 @@ public class ParallelAssembler {
 
 
 
-    public boolean simpleAssemble() throws InterruptedException {
+    public boolean parallelAssemble() throws InterruptedException {
         Tile[] foundationTiles = assembly.getTiles();
 
         int[] neighborsColors = new int[4];

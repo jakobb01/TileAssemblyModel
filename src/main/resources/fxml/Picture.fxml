@@ -42,13 +42,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jakobbeber.tam.Picture">
+<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jakobbeber.tam.ControllerGui">
   <children>
       <HBox prefHeight="600.0" prefWidth="800.0" VBox.vgrow="ALWAYS">
          <children>
             <GridPane fx:id="mtx" prefWidth="680.0" HBox.hgrow="ALWAYS">
                <rowConstraints>
-                  <RowConstraints minHeight="30.0" prefHeight="30.0"  />
+                  <RowConstraints minHeight="30.0" prefHeight="30.0" />
                </rowConstraints>
                <columnConstraints>
                   <ColumnConstraints minWidth="30.0" prefWidth="30.0" />
@@ -56,7 +56,7 @@
             </GridPane>
           <AnchorPane maxHeight="-Infinity" prefHeight="600.0" prefWidth="120.0" HBox.hgrow="ALWAYS">
             <children>
-                  <Button fx:id="start" layoutX="734.0" layoutY="559.0" mnemonicParsing="false" onAction="#startTable" prefHeight="26.0" prefWidth="52.0" text="Start" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="14.0" />
+                  <Button fx:id="start_table" layoutX="734.0" layoutY="559.0" mnemonicParsing="false" onAction="#startTable" prefHeight="26.0" prefWidth="52.0" text="Start" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="14.0" />
                   <Button fx:id="reset" layoutX="734.0" layoutY="521.0" mnemonicParsing="false" onAction="#resetTable" prefHeight="26.0" prefWidth="52.0" text="Reset" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="14.0" />
                   <Button fx:id="step" layoutX="734.0" layoutY="481.0" mnemonicParsing="false" onAction="#stepBystep" prefHeight="26.0" prefWidth="52.0" text="Step" AnchorPane.bottomAnchor="87.0" AnchorPane.rightAnchor="14.0" />
                   <TextField fx:id="time" disable="true" editable="false" layoutX="684.0" layoutY="41.0" prefHeight="18.0" prefWidth="35.0" promptText="10" AnchorPane.rightAnchor="81.0" AnchorPane.topAnchor="41.0" />

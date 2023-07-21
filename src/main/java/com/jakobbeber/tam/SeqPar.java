@@ -74,7 +74,7 @@ public class SeqPar {
                 thread[i] = new Thread() {
                     public void run() {
                         try {
-                            parallelAssembler.simpleAssemble();
+                            parallelAssembler.parallelAssemble();
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }

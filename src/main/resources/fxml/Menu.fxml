@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jakobbeber.tam.Menu">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jakobbeber.tam.ControllerGui">
    <children>
       <SplitPane dividerPositions="0.5050403225806452" orientation="VERTICAL" prefHeight="300.0" prefWidth="250.0">
         <items>
@@ -37,7 +37,7 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <Button fx:id="start" disable="true" layoutX="69.0" layoutY="14.0" mnemonicParsing="false" onAction="#runSim" prefHeight="40.0" prefWidth="110.0" text="START" />
+                              <Button fx:id="start_process" disable="true" layoutX="69.0" layoutY="14.0" mnemonicParsing="false" onAction="#runProcess" prefHeight="40.0" prefWidth="110.0" text="START" />
                            </children>
                         </AnchorPane>
                     </items>

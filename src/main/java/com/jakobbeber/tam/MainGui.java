@@ -4,27 +4,31 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class PictureLoader extends Application {
+import java.io.IOException;
+
+
+public class MainGui extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage stage) throws IOException {
         // Load the FXML file
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Picture.fxml"));
+        //ControllerGui controllerGui = new ControllerGui(new Assembly());
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Menu.fxml"));
 
         // Create a scene with the loaded FXML file
         Scene scene = new Scene(root);
 
-        primaryStage.setTitle("Picture");
+        stage.setTitle("Main Menu");
         // Set the scene on the primary stage
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
+        stage.setScene(scene);
+        stage.show();
 
     }
-
     public static void main(String[] args) {
         launch(args);
     }
 }
+

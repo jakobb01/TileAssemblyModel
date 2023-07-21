@@ -1,6 +1,8 @@
 package Distributed;
 
-// Uncomment this to run the program, make sure you have MPI installed, specify MPJ_HOME in environment variables
+// Uncomment this to run the program, make sure you have MPI installed, in compiler specify:
+// Enviorment variables: MPJ_HOME = path\to\mpj
+// VM options: -jar C:\mpj\lib\starter.jar Distributed -np 4
 /*
 import mpi.MPI;
 
