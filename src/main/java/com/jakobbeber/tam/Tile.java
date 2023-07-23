@@ -5,6 +5,8 @@ public class Tile {
     private int[] glue;
     private String name;
 
+    private String color;
+
     public Tile() {
         colors = new int[4]; // initialize colors array with default values
         glue = new int[4]; // initialize glue array with default values
@@ -35,4 +37,11 @@ public class Tile {
         this.name = name;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 }

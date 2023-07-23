@@ -15,13 +15,12 @@ public class SeqPar {
         this.assembler = assembler;
     }
 
-    public long sequential(long k, List<Map.Entry<Integer,Integer>>  queue, Tile[] tilesArray) {
+    public long sequential(long x, long y, List<Map.Entry<Integer,Integer>>  queue, Tile[] tilesArray) {
         List<Map.Entry<Integer, Integer>> nextIter;
 
-        // TO DO: Stop loop if certain size of table is reached
         int i = 0;
         long startTime = System.nanoTime();
-        while (!queue.isEmpty() && (queue.get(0).getKey() < k) && (queue.get(0).getValue() < k)) {
+        while (!queue.isEmpty() && (queue.get(0).getKey() < x) && (queue.get(0).getValue() < y)) {
 
             // we pick from the queue one tile at the time
             int randomNum = ThreadLocalRandom.current().nextInt(0, queue.size());
@@ -46,7 +45,7 @@ public class SeqPar {
         return (stopTime - startTime);
     }
 
-    public long parallel(long k) throws InterruptedException {
+    public long parallel(long x, long y) throws InterruptedException {
 
         ParallelAssembler parallelAssembler = new ParallelAssembler(assembly);
         List<Map.Entry<Integer, Integer>> nextIter;
@@ -64,7 +63,7 @@ public class SeqPar {
         nextIter.clear();
 
         // run function till when queue is empty or k is enough
-        while ((!queue.isEmpty()) && (queue.get(0).getKey() < k) && (queue.get(0).getValue() < k)) {
+        while ((!queue.isEmpty()) && (queue.get(0).getKey() < x) && (queue.get(0).getValue() < y)) {
 
             int m = min(availableProcessors, queue.size()+1);
 
@@ -88,25 +87,14 @@ public class SeqPar {
             queue = assembly.getQueue2();
             nextIter = assembly.getQueue();
             if (queue.isEmpty()) {
-
                 queue.addAll(nextIter);
                 nextIter.clear();
             }
-
-            //System.out.println(queue.isEmpty());
         }
-
-
-
 
         System.out.println(Arrays.asList(assembly.getTable()));
 
         long stopTime = System.nanoTime();
-
-
         return stopTime - startTime;
     }
-
-
-
 }

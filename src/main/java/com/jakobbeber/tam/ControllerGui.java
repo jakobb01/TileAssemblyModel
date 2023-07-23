@@ -1,5 +1,6 @@
 package com.jakobbeber.tam;
 
+import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -64,14 +65,23 @@ public class ControllerGui {
     }
 
 
-    private Assembly assembly;
+    private static Assembly assembly;
+
+    private String tileSetUp;
+    private long xlengthTable = 100;
+    private long ylengthTable = 100;
+    private int computeType = -1;
+    private long computeTime = -1;
+
 
     @FXML
     void runProcess(ActionEvent event) throws InterruptedException, IOException {
         // TO DO: run mainProcess & return important values back
-        Assembly assembly = new Assembly();
+        assembly = new Assembly();
+        assembly.setTable(HashBasedTable.create());
         MainProcess mainProcess = new MainProcess(assembly);
-        MainProcess.main_process();
+
+        computeTime = mainProcess.main_process(tileSetUp, (xlengthTable*2), (ylengthTable*2), computeType);
 
 
         // Open Picture.fxml screen
@@ -82,8 +92,7 @@ public class ControllerGui {
         stage.setTitle("Picture");
         stage.setScene(scene);
         stage.show();
-
-
+        //setTime();
     }
 
 
@@ -108,7 +117,7 @@ public class ControllerGui {
         triangle.setToggleGroup(toggleGroup);
         RadioButton selectedRadioButton = (RadioButton) toggleGroup.getSelectedToggle();
         String toogleGroupValue = selectedRadioButton.getId();
-        System.out.println(toogleGroupValue);
+        tileSetUp = toogleGroupValue;
 
         if (j == 0) { j = 1; } else {j = 1; }
         startButtonActive();
@@ -143,11 +152,11 @@ public class ControllerGui {
     void setComputeMode(ActionEvent event) {
         Button x = (Button) event.getSource();
         if (x.getId().equals(seq.getId()))
-            System.out.println("0");
+            computeType = 0;
         else if(x.getId().equals(par.getId()))
-            System.out.println("1");
+            computeType = 1;
         else if(x.getId().equals(dist.getId()))
-            System.out.println("2");
+            computeType = 2;
 
         if (i == 0) { i = 1; } else {i = 1; }
         startButtonActive();
@@ -185,12 +194,18 @@ public class ControllerGui {
     private TextField time;
 
 
+    void setTime () {
+        time.setText(String.valueOf(computeTime));
+    }
+
     @FXML
     void resetTable(ActionEvent event) {
-        Node node = mtx.getChildren().get(0);
-        mtx.getChildren().clear();
-        stepx = 0;
-        stepy = 0;
+        if (!(stepx == 0 && stepy == 0)) {
+            Node node = mtx.getChildren().get(0);
+            mtx.getChildren().clear();
+            stepx = 0;
+            stepy = 0;
+        }
     }
 
     @FXML
@@ -203,42 +218,47 @@ public class ControllerGui {
 
     @FXML
     void stepBystep(ActionEvent event) {
-        for (int i = 0; i < stepx+1; i++) {
-            addKocka(stepx, stepy-i);
+        if (stepx < xlengthTable) {
+            for (int i = 0; i < stepx+1; i++) {
+                addKocka(stepx, stepy-i);
+            }
         }
-        for (int i = 0; i < stepy+1; i++) {
-            addKocka(stepx-i, stepy);
+        if (stepy < ylengthTable) {
+            for (int i = 0; i < stepy+1; i++) {
+                addKocka(stepx-i, stepy);
+            }
         }
         stepx++;
         stepy++;
     }
 
     void builderTable() {
+        int x = 30;/*(Integer.parseInt(xsize.getText()))*/
+        int y = 30;/*(Integer.parseInt(ysize.getText()))*/
 
-
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
                 addKocka(i, j);
-
             }
         }
-        stepx=10;
-        stepy=10;
+        stepx=x;
+        stepy=y;
 
     }
 
     void addKocka(int x, int y){
 
         //get string from table
-        /*
         Table<Integer, Integer, Tile> table = assembly.getTable();
         String string = Objects.requireNonNull(table.get(x, y)).getName();
+        String color = Objects.requireNonNull(table.get(x, y)).getColor();
+
 
         TextField tf = new TextField(string);
+        tf.setStyle("-fx-background-color: " + color + ";");
 
-         */
-        TextField tf = new TextField("S");
+
+        //TextField tf = new TextField("S");
         tf.setPrefHeight(30);
         tf.setPrefWidth(30);
         tf.setAlignment(Pos.CENTER);
