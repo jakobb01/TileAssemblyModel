@@ -99,11 +99,13 @@ public class ControllerGui {
     @FXML
     void x_size(ActionEvent event) {
         text_numbers_x();
+        get_x_size();
     }
 
     @FXML
     void y_size(ActionEvent event) {
         text_numbers_y();
+        get_y_size();
     }
 
     @FXML
@@ -133,7 +135,10 @@ public class ControllerGui {
                 }
             }
         });
+    }
 
+    void get_y_size() {
+        ylengthTable = Long.parseLong(ysize.getText());
     }
 
     void text_numbers_x() {
@@ -146,7 +151,10 @@ public class ControllerGui {
                 }
             }
         });
+    }
 
+    void get_x_size() {
+        xlengthTable = Long.parseLong(xsize.getText());
     }
 
     void setComputeMode(ActionEvent event) {

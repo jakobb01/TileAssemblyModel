@@ -62,9 +62,11 @@
                       <Button fx:id="start_table" layoutX="734.0" layoutY="559.0" mnemonicParsing="false" onAction="#startTable" prefHeight="26.0" prefWidth="52.0" text="Start" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="14.0" />
                       <Button fx:id="reset" layoutX="734.0" layoutY="521.0" mnemonicParsing="false" onAction="#resetTable" prefHeight="26.0" prefWidth="52.0" text="Reset" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="14.0" />
                       <Button fx:id="step" layoutX="734.0" layoutY="481.0" mnemonicParsing="false" onAction="#stepBystep" prefHeight="26.0" prefWidth="52.0" text="Step" AnchorPane.bottomAnchor="87.0" AnchorPane.rightAnchor="14.0" />
+                      <!--
                       <TextField fx:id="time" disable="true" editable="false" layoutX="684.0" layoutY="41.0" prefHeight="18.0" prefWidth="35.0" AnchorPane.rightAnchor="81.0" AnchorPane.topAnchor="41.0" />
                       <Text layoutX="734.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ms" AnchorPane.rightAnchor="16.81640625" />
                       <Text layoutX="684.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Computation took:" AnchorPane.rightAnchor="16.408203125" AnchorPane.topAnchor="14.05078125" />
+                        -->
                 </children>
             </AnchorPane>
          </children>
