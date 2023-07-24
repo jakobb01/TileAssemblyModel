@@ -79,7 +79,14 @@ public class MainProcess {
     }
 
     public static void main(String[] args) throws InterruptedException  {
-        // For manual testing, change the argument to either "binary" or "triangle"
-        main_process("binary", 1000, 1000, 0);
+        Assembly assembly = new Assembly();
+        MainProcess mainProcess = new MainProcess(assembly);
+        assembly.setTable(HashBasedTable.create());
+        // For manual testing, arguments start here:
+        String nic = "binary";
+        String ena = "triangle";
+        // 0 = sequential, 1 = parallel
+        int computeType = 1;
+        main_process(nic, 10000, 10000, computeType);
     }
 }

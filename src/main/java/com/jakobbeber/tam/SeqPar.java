@@ -91,10 +91,9 @@ public class SeqPar {
                 nextIter.clear();
             }
         }
+        long stopTime = System.nanoTime();
 
         System.out.println(Arrays.asList(assembly.getTable()));
-
-        long stopTime = System.nanoTime();
         return stopTime - startTime;
     }
 }
